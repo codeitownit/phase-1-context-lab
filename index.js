@@ -21,39 +21,39 @@ const allWagesFor = function () {
     return payable
 }
 
-function createEmployeeRecord([firstName, familyName, title, payPerHour]) {
+function createEmployeeRecord(row) {
     return {
-        firstName: firstName,
-        familyName: familyName,
-        title: title,
-        payPerHour: payPerHour,
+        firstName: row[0],
+        familyName: row[1],
+        title: row[2],
+        payPerHour: row[3],
         timeInEvents: [],
         timeOutEvents: []
     };
 }
 
 function createEmployeeRecords(employeeData) {
-    return employeeData.map(function (data) {
-        return createEmployeeRecord(data);
+    return employeeData.map(function (row) {
+        return createEmployeeRecord(row);
     });
 }
 
 function createTimeInEvent(dateStamp) {
-    let [date, hour] = dateStamp.split(" ");
+    let [dIn, dOut] = dateStamp.split(" ");
     this.timeInEvents.push({
         type: "TimeIn",
-        date: date,
-        hour: parseInt(hour)
+        date: dIn,
+        hour: parseInt(dOut, 10)
     });
     return this;
 }
 
 function createTimeOutEvent(dateStamp) {
-    let [date, hour] = dateStamp.split(" ");
+    let [dIn, dOut] = dateStamp.split(" ");
     this.timeOutEvents.push({
         type: "TimeOut",
-        date: date,
-        hour: parseInt(hour)
+        date: dIn,
+        hour: parseInt(dOut, 10)
     });
     return this;
 }
